@@ -1,0 +1,35 @@
+version: "3.7"
+services:
+  rabbitmq:
+    restart: always
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+    image: "rabbitmq:3-management"
+    networks:
+      - nearest_prime
+  cpp_rpc:
+    restart: always
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    networks:
+      - nearest_prime
+    depends_on:
+      - rabbitmq
+  restfull:
+    restart: always
+    ports:
+      - "5000:5000"
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    networks:
+      - nearest_prime
+    depends_on:
+      - rabbitmq
+      - cpp_rpc
+  
+networks:
+  nearest_prime:
+    driver: bridge
