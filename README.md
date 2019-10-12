@@ -4,14 +4,14 @@
 1. Собираем RPC-сервер (можно пропустить, т.к. уже собран)
 ```
 sudo apt-get install libpoco-dev
-cd nearest_prime/server/build
+cd ~/nearest_prime/server/build
 cmake ..
 make
 ```
 
 2. Собираем мультиконтейнерное приложение
 ```
-cd ../..
+cd ~/nearest_prime
 sudo docker-compose build
 ```
 
